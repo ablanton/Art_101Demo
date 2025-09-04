@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>16-Beat Sequencer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>16-Beat Sequencer</h1>
+        
+        <!-- Controls -->
+        <div class="controls">
+            <div class="tempo-control">
+                <label for="tempo">Tempo: <span id="tempo-value">120</span> BPM</label>
+                <input type="range" id="tempo" min="60" max="200" value="120">
+            </div>
+            
+            <div class="playback-controls">
+                <button id="play-pause" class="play-btn">▶️ Play</button>
+                <button id="stop" class="stop-btn">⏹️ Stop</button>
+                <button id="clear" class="clear-btn">🗑️ Clear</button>
+            </div>
+        </div>
+
+        <!-- Sequencer Grid -->
+        <div class="sequencer">
+            <!-- Bass Row -->
+            <div class="track">
+                <div class="track-label">Bass</div>
+                <div class="track-controls">
+                    <button class="track-settings-btn" data-track="bass">⚙️</button>
+                </div>
+                <div class="steps">
+                    <div class="step" data-track="bass" data-step="0"></div>
+                    <div class="step" data-track="bass" data-step="1"></div>
+                    <div class="step" data-track="bass" data-step="2"></div>
+                    <div class="step" data-track="bass" data-step="3"></div>
+                    <div class="step" data-track="bass" data-step="4"></div>
+                    <div class="step" data-track="bass" data-step="5"></div>
+                    <div class="step" data-track="bass" data-step="6"></div>
+                    <div class="step" data-track="bass" data-step="7"></div>
+                    <div class="step" data-track="bass" data-step="8"></div>
+                    <div class="step" data-track="bass" data-step="9"></div>
+                    <div class="step" data-track="bass" data-step="10"></div>
+                    <div class="step" data-track="bass" data-step="11"></div>
+                    <div class="step" data-track="bass" data-step="12"></div>
+                    <div class="step" data-track="bass" data-step="13"></div>
+                    <div class="step" data-track="bass" data-step="14"></div>
+                    <div class="step" data-track="bass" data-step="15"></div>
+                </div>
+            </div>
+
+            <!-- Snare Row -->
+            <div class="track">
+                <div class="track-label">Snare</div>
+                <div class="track-controls">
+                    <button class="track-settings-btn" data-track="snare">⚙️</button>
+                </div>
+                <div class="steps">
+                    <div class="step" data-track="snare" data-step="0"></div>
+                    <div class="step" data-track="snare" data-step="1"></div>
+                    <div class="step" data-track="snare" data-step="2"></div>
+                    <div class="step" data-track="snare" data-step="3"></div>
+                    <div class="step" data-track="snare" data-step="4"></div>
+                    <div class="step" data-track="snare" data-step="5"></div>
+                    <div class="step" data-track="snare" data-step="6"></div>
+                    <div class="step" data-track="snare" data-step="7"></div>
+                    <div class="step" data-track="snare" data-step="8"></div>
+                    <div class="step" data-track="snare" data-step="9"></div>
+                    <div class="step" data-track="snare" data-step="10"></div>
+                    <div class="step" data-track="snare" data-step="11"></div>
+                    <div class="step" data-track="snare" data-step="12"></div>
+                    <div class="step" data-track="snare" data-step="13"></div>
+                    <div class="step" data-track="snare" data-step="14"></div>
+                    <div class="step" data-track="snare" data-step="15"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step Numbers -->
+        <div class="step-numbers">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>5</span>
+            <span>6</span>
+            <span>7</span>
+            <span>8</span>
+            <span>9</span>
+            <span>10</span>
+            <span>11</span>
+            <span>12</span>
+            <span>13</span>
+            <span>14</span>
+            <span>15</span>
+            <span>16</span>
+        </div>
+
+        <!-- Current Step Indicator -->
+        <div class="current-step" id="current-step"></div>
+    </div>
+
+    <!-- Track Settings Modals -->
+    <div id="bass-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Bass Settings</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="control-group">
+                    <label for="bass-volume">Volume</label>
+                    <input type="range" id="bass-volume" min="0" max="100" value="80" class="control-slider">
+                    <span class="control-value" id="bass-volume-value">80%</span>
+                </div>
+                <div class="control-group">
+                    <label for="bass-pitch">Pitch</label>
+                    <input type="range" id="bass-pitch" min="30" max="120" value="60" class="control-slider">
+                    <span class="control-value" id="bass-pitch-value">60 Hz</span>
+                </div>
+                <div class="control-group">
+                    <label for="bass-filter">Filter</label>
+                    <input type="range" id="bass-filter" min="50" max="500" value="200" class="control-slider">
+                    <span class="control-value" id="bass-filter-value">200 Hz</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="snare-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Snare Settings</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="control-group">
+                    <label for="snare-volume">Volume</label>
+                    <input type="range" id="snare-volume" min="0" max="100" value="70" class="control-slider">
+                    <span class="control-value" id="snare-volume-value">70%</span>
+                </div>
+                <div class="control-group">
+                    <label for="snare-pitch">Pitch</label>
+                    <input type="range" id="snare-pitch" min="150" max="300" value="200" class="control-slider">
+                    <span class="control-value" id="snare-pitch-value">200 Hz</span>
+                </div>
+                <div class="control-group">
+                    <label for="snare-filter">Filter</label>
+                    <input type="range" id="snare-filter" min="500" max="2000" value="1000" class="control-slider">
+                    <span class="control-value" id="snare-filter-value">1000 Hz</span>
+                </div>
+                <div class="control-group">
+                    <label for="snare-length">Length</label>
+                    <input type="range" id="snare-length" min="50" max="500" value="200" class="control-slider">
+                    <span class="control-value" id="snare-length-value">200ms</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
